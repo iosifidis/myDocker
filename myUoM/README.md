@@ -11,18 +11,18 @@ The application is live. You can visit it here:
 
 ## Instructions
 
-Create the image locally (run the following command in the same folder as your Dockerfile): 
+Create the image locally (run the following command in the same folder as your Dockerfile):    
 **docker built -t myapp .**
 
-You can run the image:
+You can run the image:   
 **docker run --name myuom -d -p 80:80 myuom**
 
 Then open your browser and type localhost.
 
-You can stop the container using the command:
+You can stop the container using the command:   
 **docker stop myuom**
 
-You can start the container using the command:
+You can start the container using the command:   
 **docker stop myuom**
 
 ## Docker hub
