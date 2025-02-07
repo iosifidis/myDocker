@@ -8,7 +8,8 @@ WORKDIR /app
 RUN apk add --no-cache git
 
 # Clone the repository into the working directory
-RUN git clone https://gitlab.com/opensourceuom/myUoM .
+# RUN git clone https://gitlab.com/opensourceuom/myUoM .
+RUN git clone https://github.com/open-source-uom/myuom.git .
 
 # Install the project dependencies
 RUN npm install
