@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine
+    container_name: privatebin
+    restart: unless-stopped
+    # Τρέχει ως χρήστης 'nobody' (uid:65534) για ασφάλεια
+    read_only: true
+#    ports:
+#      - "8090:8080"  # <--- ΠΡΟΣΘΕΣΕ ΑΥΤΟ
+    volumes:
+      - ./data:/srv/data
+      - ./conf.php:/srv/conf.php:ro
+    networks:
+      - web
+    # Η εικόνα από προεπιλογή ακούει στην πόρτα 8080
+    
+networks:
+  web:
+    external: true
+

@@ -1,0 +1,14 @@
+privatebin.duckdns.org {
+    # Logs (προαιρετικά)
+    log {
+        output file /var/log/caddy/privatebin.log
+    }
+
+    reverse_proxy privatebin:8080 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        # ΑΥΤΑ ΤΑ ΔΥΟ ΕΙΝΑΙ ΤΟ ΚΛΕΙΔΙ ΓΙΑ ΝΑ ΦΥΓΕΙ ΤΟ ΚΟΚΚΙΝΟ ΜΗΝΥΜΑ:
+        header_up X-Forwarded-Proto https
+        header_up X-Forwarded-Ssl on
+    }
+}
