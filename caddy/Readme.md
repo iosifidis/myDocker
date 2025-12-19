@@ -1,6 +1,6 @@
 # Raspberry Pi Reverse Proxy with Caddy & Docker
 
-This repository contains a production-ready `docker-compose` setup for running **Caddy Server** on a Raspberry Pi. Caddy is a powerful, enterprise-ready open-source web server with automatic HTTPS.
+This repository contains a production-ready `docker-compose` setup for running [**Caddy Server**](https://caddyserver.com/) on a Raspberry Pi. Caddy is a powerful, enterprise-ready open-source web server with automatic HTTPS.
 
 ## 🚀 Why Caddy?
 
