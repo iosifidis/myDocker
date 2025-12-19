@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  dokuwiki:
+    image: linuxserver/dokuwiki:latest
+    container_name: dokuwiki
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+      - DOKUWIKI_BASEURL=https://iosifidis.servebeer.com/docs
+    volumes:
+      - /docker/dokuwiki/data:/data
+      - /docker/dokuwiki/config:/config
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

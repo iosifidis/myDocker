@@ -1,0 +1,8 @@
+dokuwiki.duckdns.org {
+    reverse_proxy dokuwiki:80
+    log {
+        output stdout
+        format console
+        level INFO # Μπορείτε να το αλλάξετε σε DEBUG για περισσότερες πληροφορίες
+    }
+}
