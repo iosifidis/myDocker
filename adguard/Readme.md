@@ -58,7 +58,7 @@ docker-compose up -d
 Add the following to your existing `Caddyfile` to access your dashboard securely from anywhere:
 
 ```caddyfile
-nextguard.duckdns.org {
+adguard.duckdns.org {
     reverse_proxy adguard:80
 }
 ```
