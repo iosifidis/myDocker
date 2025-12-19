@@ -1,0 +1,3 @@
+adguard.duckdns.org {
+     reverse_proxy adguard:80
+}

@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  adguard:
+    container_name: adguard
+    image: adguard/adguardhome
+    restart: unless-stopped
+    # Χρειαζόμαστε τα ports ανοιχτά στον host για να λειτουργεί το DNS
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Πόρτα για το αρχικό setup (μόνο την πρώτη φορά)
+      - "3000:3000/tcp"
+      # Προαιρετικά: Αν θέλεις να μπαίνεις και με IP τοπικά (π.χ. 192.168.1.200:8080)
+      # - "8080:80/tcp" 
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
+    networks:
+      - web
+
+# Χρήση στο δίκτυο με το caddy
+networks:
+  web:
+    external: true
