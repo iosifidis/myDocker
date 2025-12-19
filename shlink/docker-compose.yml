@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    container_name: shlink
+    restart: unless-stopped
+    environment:
+      # Ρυθμίσεις Domain
+      - DEFAULT_DOMAIN=shlink.duckdns.org
+      - IS_HTTPS_ENABLED=true
+      
+      # Ρυθμίσεις Βάσης Δεδομένων (SQLite για οικονομία πόρων)
+      - DB_DRIVER=sqlite
+      
+      # Λοιπές ρυθμίσεις
+      - SHELL_VERBOSITY=0
+      - SHORT_DOMAIN_SCHEMA=https
+      
+      # Προαιρετικό: Αν θες στατιστικά τοποθεσίας (χρειάζεται δωρεάν κλειδί από MaxMind)
+      # - GEOLITE_LICENSE_KEY=your_license_key_here
+    
+    volumes:
+      # Αποθήκευση της SQLite βάσης τοπικά
+      - ./database:/etc/shlink/data
+    
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+
