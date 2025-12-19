@@ -1,0 +1,15 @@
+rustdesk.duckdns.org {
+    # Προσθήκη CORS headers για να επιτρέπεται η σύνδεση
+    # από την επίσημη σελίδα του RustDesk web client.
+    header {
+        Access-Control-Allow-Origin "https://rustdesk.com"
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "*"
+    }
+
+    # Reverse proxy για τον web client (hbbs)
+    reverse_proxy /ws/id/* hbbs:21118
+
+    # Reverse proxy για τον web client (hbbr)
+    reverse_proxy /ws/relay/* hbbr:21119
+}
