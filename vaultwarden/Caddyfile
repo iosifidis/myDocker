@@ -1,0 +1,14 @@
+vault.duckdns.org {
+    # Προσθήκη ασφάλειας HSTS κλπ (προαιρετικά αλλά καλό)
+    header {
+        Strict-Transport-Security "max-age=31536000;"
+        X-XSS-Protection "1; mode=block"
+        X-Frame-Options "DENY"
+    }
+
+    # Reverse proxy στο Vaultwarden (Port 80 εσωτερικά)
+    reverse_proxy vaultwarden:80 {
+       # Ρυθμίσεις για να δουλεύουν τα WebSockets
+       header_up X-Real-IP {remote_host}
+    }
+}
