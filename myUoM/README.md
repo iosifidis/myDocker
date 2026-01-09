@@ -14,6 +14,10 @@ The application is live. You can visit it here:
 Create the image locally (run the following command in the same folder as your Dockerfile):    
 **docker built -t myapp .**
 
+or
+
+**docker build --no-cache -t myuom .**
+
 You can run the image:   
 **docker run --name myuom -d -p 80:80 myuom**
 
@@ -23,7 +27,7 @@ You can stop the container using the command:
 **docker stop myuom**
 
 You can start the container using the command:   
-**docker stop myuom**
+**docker start myuom**
 
 ## Docker hub
 
@@ -34,3 +38,13 @@ To pull the image from the hub, run the command:
 **docker pull iosifidis/myuom**
 
 Then, to run it, you can use the above commands.
+
+## Upload to docker hub
+
+```
+docker login
+
+docker tag myuom:latest iosifidis/myuom:latest
+
+docker push iosifidis/myuom:latest
+```

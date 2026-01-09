@@ -1,5 +1,5 @@
 # Use the official Node.js LTS (Long Term Support) image on Alpine Linux as the base image
-FROM node:14-alpine AS build
+FROM node:20-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -7,9 +7,10 @@ WORKDIR /app
 # Install git in the image
 RUN apk add --no-cache git
 
-# Clone the repository into the working directory
-# RUN git clone https://gitlab.com/opensourceuom/myUoM .
-RUN git clone https://github.com/open-source-uom/myuom.git .
+# Clone the repository into the working directory (my repo has latest version)
+#RUN git clone https://gitlab.com/opensourceuom/myUoM .
+#RUN git clone https://github.com/open-source-uom/myuom.git .
+RUN git clone https://github.com/iosifidis/myuom.git .
 
 # Install the project dependencies
 RUN npm install
@@ -17,11 +18,15 @@ RUN npm install
 # Build the React app for production
 RUN npm run build
 
+# No need of this. Just for debugging
+RUN ls -la /app
+
 # Use the lightweight Nginx image on Alpine Linux to serve the built React app
 FROM nginx:alpine
 
 # Copy the built React app from the 'build' stage to the Nginx public directory
-COPY --from=build /app/build /usr/share/nginx/html
+#COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80 to the host machine
 EXPOSE 80
