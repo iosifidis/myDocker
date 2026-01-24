@@ -1,4 +1,4 @@
-# Τεκμηρίωση Εγκατάστασης Vikunja (Lightweight) σε Banana Pi M4
+# Τεκμηρίωση Εγκατάστασης Vikunja
 
 **Σύστημα:** Banana Pi M4 (2GB RAM) / Armbian
 **Stack:** Docker, Docker Compose, Caddy (Reverse Proxy)
