@@ -1,9 +1,9 @@
 # Τεκμηρίωση Εγκατάστασης Vikunja
 
-**Σύστημα:** Banana Pi M4 (2GB RAM) / Armbian
-**Stack:** Docker, Docker Compose, Caddy (Reverse Proxy)
-**Βάση Δεδομένων:** SQLite (Ενσωματωμένη για ελαχιστοποίηση πόρων)
-**Domain:** `example.me`
+**Σύστημα:** Banana Pi M4 (2GB RAM) / Armbian   
+**Stack:** Docker, Docker Compose, Caddy (Reverse Proxy)   
+**Βάση Δεδομένων:** SQLite (Ενσωματωμένη για ελαχιστοποίηση πόρων)   
+**Domain:** `example.me`   
 
 Το [Vikunja](https://vikunja.io/) είναι μια δωρεάν, ανοιχτού κώδικα (open-source) και αυτοφιλοξενούμενη (self-hosted) εφαρμογή διαχείρισης εργασιών (to-do list). Σχεδιασμένο για να οργανώνει τη ζωή και τα έργα σας, προσφέρει πολλαπλές προβολές όπως λίστες, Kanban πίνακες (kanban board), Gantt διαγράμματα και πίνακες δεδομένων. Υποστηρίζει ιεραρχική οργάνωση με υποέργα και είναι διαθέσιμο σε όλες τις πλατφόρμες. 
 
