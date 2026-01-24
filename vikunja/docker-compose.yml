@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  vikunja:
+    image: vikunja/vikunja
+    restart: unless-stopped
+    environment:
+      # Ρυθμίσεις Domain
+      VIKUNJA_SERVICE_PUBLICURL: "https://iosifidis.myddns.me/"
+      
+      # Ρυθμίσεις Βάσης (SQLite για μέγιστη οικονομία πόρων)
+      VIKUNJA_DATABASE_TYPE: "sqlite"
+      VIKUNJA_DATABASE_PATH: "/db/vikunja.db"
+      
+      # Timezone
+      VIKUNJA_SERVICE_TIMEZONE: "Europe/Athens"
+      
+      # Απενεργοποίηση εγγραφών (αν θες να μπαίνεις μόνο εσύ, το αλλάζεις αφού φτιάξεις το account σου)
+      VIKUNJA_SERVICE_ENABLEREGISTRATION: "true" 
+    volumes:
+      - ./files:/app/vikunja/files  # Εδώ αποθηκεύονται τα ανεβασμένα αρχεία/εικόνες
+      - ./db:/db                    # Εδώ αποθηκεύεται η βάση δεδομένων (sqlite)
+    networks:
+      - web
+    ports:
+      # Προαιρετικό: Αν θες να το βλέπεις και τοπικά στην 3456
+      - "3456:3456"
+
+networks:
+  web:
+    external: true
