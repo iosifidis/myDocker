@@ -1,0 +1,35 @@
+services:
+  psitransfer:
+    # Χρήση της επίσημης, σταθερής εικόνας του PsiTransfer
+    image: psitrax/psitransfer
+    
+    # Ορισμός ενός σταθερού ονόματος για το container για εύκολη διαχείριση
+    container_name: psitransfer
+    
+    # Αυτόματη επανεκκίνηση του container σε περίπτωση σφάλματος ή επανεκκίνησης του server
+    restart: unless-stopped
+    
+    volumes:
+      # Σύνδεση (mapping) του τοπικού φακέλου 'psitransfer_data' με τον φάκελο '/data' μέσα στο container.
+      # Εδώ αποθηκεύονται όλα τα αρχεία που ανεβαίνουν οι χρήστες.
+      - ./psitransfer_data:/data
+      
+    networks:
+      # Σύνδεση του container στο δίκτυο 'web', ώστε ο Caddy να μπορεί να επικοινωνήσει μαζί του.
+      - web
+      
+    # Μεταβλητές περιβάλλοντος για την παραμετροποίηση του PsiTransfer
+    environment:
+      # Ορίστε έναν ισχυρό κωδικό πρόσβασης για την περιοχή διαχείρισης
+      - PSITRANSFER_ADMIN_PASS=YourSecurePasswordHere 
+      - PSITRANSFER_DEFAULT_LANGUAGE=el
+      - PSITRANSFER_MAX_UPLOAD_SIZE=2147483648
+      
+      # (Προαιρετικό) Αλλάξτε τον προεπιλεγμένο χρόνο διατήρησης αρχείων σε δευτερόλεπτα.
+      # Π.χ., 86400 για 24 ώρες.
+      # - PSITRANSFER_DEFAULT_RETENTION=86400
+
+# Δήλωση ότι το δίκτυο 'web' είναι εξωτερικό και δεν πρέπει να δημιουργηθεί από αυτό το αρχείο.
+networks:
+  web:
+    external: true
