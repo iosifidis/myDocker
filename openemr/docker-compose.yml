@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mariadb:10.11
+    container_name: openemr_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_here
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - internal
+
+  openemr:
+    image: openemr/openemr:7.0.4
+    container_name: openemr_app
+    restart: always
+    environment:
+      MANUAL_SETUP: "yes" # Επιτρέπει τη χειροκίνητη εγκατάσταση
+      MYSQL_HOST: mysql
+    volumes:
+      - ./sites:/var/www/localhost/htdocs/openemr/sites
+      - ./logs:/var/www/logs # Διόρθωση για τα SSL Apache logs
+    depends_on:
+      - mysql
+    networks:
+      - internal
+      - web
+
+networks:
+  internal:
+  web:
+    external: true
