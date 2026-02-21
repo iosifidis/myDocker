@@ -28,6 +28,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**Shlink**](./shlink/) – A self-hosted, feature-rich URL shortener with detailed visit analytics and an API-first design.
 - [**DokuWiki**](./dokuwiki/) – A highly versatile, database-less Open Source wiki engine used for personal documentation and knowledge bases.
 - [**Vikunja**](./vikunja) - Vikunja is a free, open-source, self-hosted to-do list application.
+- [**Linkding**](./linkding/) - A lightweight, self-hosted bookmark manager for efficiently organizing your web links with tags and full-text search.
 
 ### 📤 File Sharing
 

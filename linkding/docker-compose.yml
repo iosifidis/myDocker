@@ -1,0 +1,19 @@
+services:
+  linkding:
+    image: sissbruecker/linkding:latest
+    container_name: linkding
+    restart: always
+    volumes:
+      - ./data:/etc/linkding/data # Bind mount για να παίρνεις εύκολα backup
+    ports:
+      - "9090:9090"
+    environment:
+      LD_SUPERUSER_NAME: "username"         # Replace with your desired username
+      LD_SUPERUSER_PASSWORD: "password" # Replace with a strong password
+      LD_SUPERUSER_EMAIL: "yourmail@gmail.com" # Replace with your email  
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
