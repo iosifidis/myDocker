@@ -36,3 +36,4 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 
 ### 📊 Data & Analytics
 - [**Metabase**](./metabase/) – An open-source business intelligence tool that lets you ask questions about your data and display answers in formats that make sense, from simple charts to detailed dashboards. Easy to set up and use, with no SQL knowledge required for basic queries.
+- [**Forgejo**](./forgejo) is a lightweight, self-hosted Git repositories management system, a fork of Gitea.

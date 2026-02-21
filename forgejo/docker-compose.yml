@@ -1,0 +1,42 @@
+#version: '3.8'
+
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:1.21
+    container_name: forgejo
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      - /docker/forgejo/data:/data
+      - /docker/forgejo/config:/etc/forgejo
+      - /docker/forgejo/ssh:/data/ssh
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "2222:22"
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__server__DOMAIN=forgejo.iosifidis.gr
+      - FORGEJO__server__ROOT_URL=https://forgejo.iosifidis.gr
+      - FORGEJO__server__HTTP_PORT=3000
+      - FORGEJO__server__PROTOCOL=http
+      - FORGEJO__server__SSH_DOMAIN=forgejo.iosifidis.gr
+      - FORGEJO__server__SSH_PORT=2222
+      - FORGEJO__server__START_SSH_SERVER=true
+      - FORGEJO__server__SSH_LISTEN_PORT=2222
+      - FORGEJO__database__DB_TYPE=sqlite3
+      - FORGEJO__database__PATH=/data/forgejo.db
+      - FORGEJO__log__MODE=console
+      - FORGEJO__log__LEVEL=Info
+      - FORGEJO__security__INSTALL_LOCK=true  # Κλείδωμα εγκατάστασης μετά την πρώτη
+      - FORGEJO__service__DISABLE_REGISTRATION=true  # Αλλαγή σε true αν δεν θέλετε εγγραφές
+      - FORGEJO__service__SHOW_REGISTRATION_BUTTON=false
+      - FORGEJO__service__REQUIRE_SIGNIN_VIEW=false
+      - FORGEJO__mailer__ENABLED=false  # Αν θέλετε email, ρυθμίστε το
+
+networks:
+  web:
+    external: true
+
