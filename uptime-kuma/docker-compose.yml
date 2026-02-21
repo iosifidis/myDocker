@@ -1,0 +1,18 @@
+# version: '3.8'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    volumes:
+      # Ο φάκελος ./uptime-kuma-data θα δημιουργηθεί και θα αποθηκεύει τα δεδομένα της εφαρμογής.
+      - ./uptime-kuma-data:/app/data
+    restart: unless-stopped
+    networks:
+      # Συνδέουμε το container στο ίδιο δίκτυο 'web' που χρησιμοποιεί και ο Caddy.
+      - web
+
+networks:
+  web:
+    # Δηλώνουμε ότι το δίκτυο αυτό είναι εξωτερικό και έχει ήδη δημιουργηθεί.
+    external: true

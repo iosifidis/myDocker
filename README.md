@@ -30,6 +30,10 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**Vikunja**](./vikunja) - Vikunja is a free, open-source, self-hosted to-do list application.
 - [**Linkding**](./linkding/) - A lightweight, self-hosted bookmark manager for efficiently organizing your web links with tags and full-text search.
 
+### 📈 Monitoring
+
+- [**Uptime Kuma**](./uptime-kuma/) - A self-hosted monitoring tool that provides a beautiful and user-friendly dashboard to monitor the uptime of your services, websites, and APIs. It sends notifications via various channels (e.g., Telegram, Discord, Email) when a service goes down or recovers.
+
 ### 📤 File Sharing
 
 - [**Psitransfer**](./psitransfer/) – A simple, self-hosted file transfer tool that allows secure and temporary file sharing via the browser. Ideal for quick and anonymous file transfers without the need for registration or complex configuration.
