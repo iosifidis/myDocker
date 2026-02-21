@@ -1,0 +1,17 @@
+services:
+  shiori:
+    image: ghcr.io/go-shiori/shiori:latest
+    container_name: shiori
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./shiori-data:/srv/shiori
+    environment:
+      - SHIORI_DIR=/srv/shiori/
+    restart: unless-stopped
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

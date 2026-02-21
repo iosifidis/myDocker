@@ -29,6 +29,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**DokuWiki**](./dokuwiki/) – A highly versatile, database-less Open Source wiki engine used for personal documentation and knowledge bases.
 - [**Vikunja**](./vikunja) - Vikunja is a free, open-source, self-hosted to-do list application.
 - [**Linkding**](./linkding/) - A lightweight, self-hosted bookmark manager for efficiently organizing your web links with tags and full-text search.
+- [**Shiori**](./shiori/) - A simple and efficient bookmark manager. Shiori allows you to save and organize your favorite web links with tags, provides full-text search, and even lets you archive web pages for offline reading. It's a lightweight, self-hosted solution for keeping your digital bookmarks in order.
 
 ### 📈 Monitoring
 
