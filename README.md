@@ -38,6 +38,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 ### 📤 File Sharing
 
 - [**Psitransfer**](./psitransfer/) – A simple, self-hosted file transfer tool that allows secure and temporary file sharing via the browser. Ideal for quick and anonymous file transfers without the need for registration or complex configuration.
+- [**Nextcloud FPM**](./nextcloud-stack/) - A comprehensive self-hosted cloud solution providing file synchronization, sharing, and collaboration tools, enhanced with a High Performance Backend for Talk and robust Kopia-based backup strategies.
 
 ### 📊 Data & Analytics
 - [**Metabase**](./metabase/) – An open-source business intelligence tool that lets you ask questions about your data and display answers in formats that make sense, from simple charts to detailed dashboards. Easy to set up and use, with no SQL knowledge required for basic queries.

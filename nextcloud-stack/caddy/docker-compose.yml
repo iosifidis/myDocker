@@ -1,0 +1,27 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+#    env_file: .env # Φορτώνει τις μεταβλητές από το .env
+    environment:
+      - MY_SITE_URL=cloud.iosifidis.gr # Προαιρετικό αν χρησιμοποιείς το env_file 
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+#      - ./site:/srv
+      - ./data:/data # Bind mount για μόνιμη αποθήκευση
+      - ./config:/config
+      # Εδώ συνδέουμε τον φάκελο του Nextcloud με το Caddy
+      - /srv/nextcloud/app:/var/www/html:ro
+      - /srv/nextcloud/nc_data:/var/www/data:ro  # Πρόσθεσε κι αυτό!
+    networks:
+      - web
+
+#docker network create web
+networks:
+  web:
+    external: true
+

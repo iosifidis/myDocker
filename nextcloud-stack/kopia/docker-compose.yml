@@ -1,0 +1,41 @@
+services:
+  kopia:
+    image: kopia/kopia:latest
+    container_name: kopia
+    restart: unless-stopped
+    user: "1000:1000" # Συνήθως ο default user του host, προσαρμόστε αν χρειάζεται
+    networks:
+      - web # Συνδέστε το στο ίδιο external network με το Caddy (για πρόσβαση στο UI)
+    environment:
+      - KOPIA_PASSWORD=your_master_repository_password # Το κλειδί για το repository (ΜΗΝ ΤΟ ΧΑΣΕΙΣ - ΑΠΑΡΑΙΤΗΤΟ ΓΙΑ ΕΠΑΝΑΦΟΡΑ)
+    command:
+      - server
+      - start
+      - --address=0.0.0.0:51515 # Ανοίγει το UI σε όλες τις διεπαφές
+      - --insecure # Προσοχή: Χρησιμοποιείται μόνο πίσω από reverse proxy όπως ο Caddy
+      - --server-username=admin
+      - --server-password=your_ui_password # Κωδικός για την πρόσβαση στο Web UI του Kopia
+    volumes:
+      # Φάκελοι λειτουργίας Kopia
+      - ./config:/app/config
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+      
+      # SSH Keys για σύνδεση σε SFTP repository (π.χ., Pensieve)
+      # Προσαρμόστε το path στο .ssh του χρήστη σας στον host
+      - /home/debian/.ssh:/app/.ssh:ro
+
+      # ΤΟΠΙΚΟ REPOSITORY (Εδώ αποθηκεύεται το κρυπτογραφημένο backup)
+      - /data/kopia_repository:/repository
+
+      # ΠΗΓΕΣ BACKUP (Τι θέλουμε να σώσουμε) - Read-only για ασφάλεια
+      - /data/nextcloud/nc_data:/data/nextcloud_user_files:ro
+      - /data/nextcloud/app/config:/data/nextcloud_config:ro
+      - /data/backups/databases:/data/nextcloud_database_dumps:ro
+      
+      # Φάκελος Επαναφοράς (για να στέλνονται τα αρχεία που ανακτώνται)
+      - ./restore:/restore:rw
+
+networks:
+  web:
+    external: true # Χρησιμοποιεί το υπάρχον external network "web"

@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: nextcloud_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=<postgrs_password> # Βάλε έναν κωδικό
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+    volumes:
+      - /srv/nextcloud/db:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    container_name: nextcloud_redis
+    restart: unless-stopped
+    networks:
+      - backend
+
+  app:
+    image: nextcloud:fpm-alpine
+    container_name: nextcloud_app
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=<postgrs_password>
+      - REDIS_HOST=redis
+      - NEXTCLOUD_TRUSTED_DOMAINS=cloud.iosifidis.gr
+      - TRUSTED_PROXIES=172.16.0.0/12 # Εδώ λέμε στο Nextcloud να εμπιστεύεται το container του Caddy
+      - OVERWRITEPROTOCOL=https
+    volumes:
+      - /srv/nextcloud/app:/var/www/html # Εδώ μπαίνει ο κώδικας (index.php κλπ)
+      - /srv/nextcloud/nc_data:/var/www/data # Εδώ θα μπούν τα αρχεία των χρηστών (ΦΩΤΟ, ΕΓΓΡΑΦΑ)
+    networks:
+      - backend
+      - web
+
+networks:
+  backend:
+    driver: bridge
+  web:
+    external: true
+

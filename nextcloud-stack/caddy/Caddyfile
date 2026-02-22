@@ -1,0 +1,39 @@
+nextcloud.ellak.gr {
+    # Ορίζουμε το root για τα στατικά αρχεία (αν το Caddy έχει πρόσβαση στον volume)
+    root * /var/www/html
+    file_server
+    encode zstd gzip
+
+    # Προσθήκη για σωστό handling των PHP αρχείων
+    php_fastcgi nextcloud_app:9000 {
+        env FRONT_END_HTTPS on
+        # Αυτό βοηθάει το Caddy να βρει το index.php αν λείπει από το URL
+        index index.php 
+    }
+
+    # redirects για mobile apps
+    redir /.well-known/carddav /remote.php/dav 301
+    redir /.well-known/caldav /remote.php/dav 301
+
+    # Security Headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "no-referrer"
+    }
+
+    # Προστασία φακέλων
+    @forbidden {
+        path /data/* /config/* /db_structure/* /.xml /etc/*
+    }
+    respond @forbidden 403
+
+    route /standalone-signaling/* {
+        uri strip_prefix /standalone-signaling
+        reverse_proxy http://nc-talk:8081 {
+           header_up X-Real-IP {remote_host}
+        }
+    }
+
+}
