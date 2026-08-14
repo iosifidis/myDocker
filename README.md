@@ -22,6 +22,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 ### 📡 Remote Access & Communication
 
 - [**RustDesk Server**](./rustdesk/) – A self-hosted remote desktop infrastructure, providing a private and fast alternative to TeamViewer/AnyDesk.
+- [**WireGuard VPN**](./wireguard/) – A lightweight, fast VPN server for secure remote access to your home network (Banana Pi) and encrypted internet browsing.
 
 ### 🛠️ Utilities & Productivity
 
