@@ -1,0 +1,4 @@
+iosifidis.servebeer.com:8888 {
+    # Reverse Proxy to Gatus service
+    reverse_proxy gatus:8080
+}

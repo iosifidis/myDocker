@@ -1,0 +1,58 @@
+web:
+  port: 8080
+
+alerting:
+  matrix:
+    access-token: "<YOUR_MATRIX_BOT_ACCESS_TOKEN>"
+    internal-room-id: "<!your_room_id:matrix.org>"
+    # server-url: "https://matrix.yourdomain.com"
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+
+  email:
+    from: "<alerts@yourdomain.tld>"
+    username: "<alerts@yourdomain.tld>"
+    password: "<YOUR_SMTP_PASSWORD>"
+    host: "<smtp.yourprovider.tld>"
+    port: 587
+    to: "<admin@yourdomain.tld>"
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+
+endpoints:
+  - name: "Banana Pi"
+    group: "Central"
+    url: "http://localhost:8080"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: "Vault"
+    group: "Security"
+    url: "https://<LOCAL_IP_HERE>:8080"
+    interval: 1m
+    client:
+      insecure: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: email
+      - type: matrix
+
+  - name: "Adguard"
+    group: "Security"
+    url: "http://<LOCAL_IP_HERE>:<PORT>"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: "Nextwiki"
+    group: "Documentation"
+    url: "http://nextwiki:8080"
+    interval: 1m
+    conditions:
+      - "[STATUS] == 200"
