@@ -1,0 +1,4 @@
+iosifidis.myddns.me {
+    # Reverse Proxy to VoucherVault app
+    reverse_proxy vouchervault:8000
+}

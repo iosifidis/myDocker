@@ -30,6 +30,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**Vikunja**](./vikunja) - Vikunja is a free, open-source, self-hosted to-do list application.
 - [**Linkding**](./linkding/) - A lightweight, self-hosted bookmark manager for efficiently organizing your web links with tags and full-text search.
 - [**Shiori**](./shiori/) - A simple and efficient bookmark manager. Shiori allows you to save and organize your favorite web links with tags, provides full-text search, and even lets you archive web pages for offline reading. It's a lightweight, self-hosted solution for keeping your digital bookmarks in order.
+- [**VoucherVault**](./vouchervault/) – An open-source voucher, gift card, and coupon management application with automated expiry notifications via Apprise.
 
 ### 📈 Monitoring
 

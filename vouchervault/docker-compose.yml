@@ -1,0 +1,30 @@
+services:
+
+  app:
+    image: l4rm4nd/vouchervault:latest
+    container_name: vouchervault
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./volume-data/database:/opt/app/database
+    networks:
+      - web
+      - internal
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: vouchervault-redis
+    restart: unless-stopped
+    networks:
+      - internal
+
+networks:
+  web:
+    external: true
+  internal:
+    driver: bridge
