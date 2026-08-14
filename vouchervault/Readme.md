@@ -173,7 +173,7 @@ docker exec caddy caddy reload
 ### Παράδειγμα URL SMTP (Apprise format):
 
 ```text
-mailtos://eiosifidis%40ellak.gr:<SMTP_PASSWORD>@mail1.ellak.gr:587/?to=eiosifidis%40gmail.com&from=eiosifidis%40ellak.gr
+mailtos://eiosifidis%40gmail.com:<PASSWORD>@smtp.gmail.com:587/?to=eiosifidis%40gmail.com&from=eiosifidis%40gmail.com
 ```
 
 > **💡 Σημαντικές σημειώσεις URL Encoding:**
@@ -183,7 +183,7 @@ mailtos://eiosifidis%40ellak.gr:<SMTP_PASSWORD>@mail1.ellak.gr:587/?to=eiosifidi
 
 #### Δοκιμή αποστολής μέσω CLI:
 ```bash
-docker exec -it vouchervault apprise -t "Test Title" -b "Test Body" "mailtos://eiosifidis%40ellak.gr:<PASSWORD>@mail1.ellak.gr:587/?to=eiosifidis%40gmail.com&from=eiosifidis%40ellak.gr"
+docker exec -it vouchervault apprise -t "Test Title" -b "Test Body" "mailtos://eiosifidis%40gmail.com:<PASSWORD>@smtp.gmail.com:587/?to=eiosifidis%40gmail.com&from=eiosifidis%40gmail.com"
 ```
 
 ---
