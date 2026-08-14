@@ -1,0 +1,14 @@
+services:
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PORT=45876
+      - KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..." # Εισάγετε το Public Key που παράγεται από το Beszel Hub (Add System)
+      # - TOKEN=your_token_here # Εισάγετε το Token εφόσον ζητείται από το Hub UI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Προαιρετικά: Mount επιπλέον δίσκων για παρακολούθηση
+      # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro

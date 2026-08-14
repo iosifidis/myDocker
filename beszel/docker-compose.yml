@@ -1,0 +1,17 @@
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      - APP_URL=https://status.iosifidis.gr
+    volumes:
+      - ./beszel_data:/beszel_data
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

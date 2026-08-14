@@ -38,6 +38,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 
 - [**Uptime Kuma**](./uptime-kuma/) - A self-hosted monitoring tool that provides a beautiful and user-friendly dashboard to monitor the uptime of your services, websites, and APIs. It sends notifications via various channels (e.g., Telegram, Discord, Email) when a service goes down or recovers.
 - [**Gatus**](./gatus/) – An extremely lightweight service health dashboard and status page in Go, supporting automated Matrix and Email alerting for home servers.
+- [**Beszel Monitoring**](./beszel/) – A lightweight, modern server monitoring hub & agent for system metrics (CPU, RAM, Disk, Network, GPU) and Docker container stats.
 
 ### 📤 File Sharing
 

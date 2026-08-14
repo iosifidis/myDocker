@@ -1,0 +1,4 @@
+status.iosifidis.gr {
+    # Reverse Proxy to Beszel Hub container
+    reverse_proxy beszel:8090
+}
