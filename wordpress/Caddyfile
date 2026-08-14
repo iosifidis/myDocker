@@ -1,0 +1,15 @@
+opensource.iosifidis.gr {
+    root * /var/www/html
+    
+    # Compression
+    encode zstd gzip
+    
+    # Fix trailing slash for wp-admin
+    redir /wp-admin /wp-admin/
+    
+    # FastCGI proxy to WordPress FPM container (port 9000)
+    php_fastcgi opensource_wp_fpm:9000
+    
+    # Serve static files (images, CSS, JS) directly via Caddy
+    file_server
+}

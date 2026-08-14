@@ -1,0 +1,50 @@
+services:
+
+  db:
+    image: mariadb:10.11
+    container_name: opensource_db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db-data:/var/lib/mysql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  wordpress:
+    image: wordpress:fpm-alpine
+    container_name: opensource_wp_fpm
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_CONFIG_EXTRA: |
+        $$_SERVER['HTTPS'] = 'on';
+    volumes:
+      - ./wp-data:/var/www/html
+      - ./php-conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - internal
+      - web
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true
