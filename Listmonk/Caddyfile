@@ -1,4 +1,4 @@
-listmonk.sandbox.ellak.gr {
+listmonk.sandbox.iosifidis.gr {
     encode zstd gzip
 
     reverse_proxy listmonk-app:9000

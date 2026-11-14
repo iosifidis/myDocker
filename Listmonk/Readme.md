@@ -34,7 +34,7 @@
 
 * **Docker** και **Docker Compose** εγκατεστημένα στον διακομιστή (Linux ARM64 / x86_64).
 * Εγκατεστημένος **Caddy Server** συνδεδεμένος σε εξωτερικό Docker δίκτυο με όνομα `web`.
-* Ένα **Domain Name** (π.χ. `listmonk.sandbox.ellak.gr`).
+* Ένα **Domain Name** (π.χ. `listmonk.sandbox.iosifidis.gr`).
 * Δικαιώματα `sudo` / `root` στον host διακομιστή.
 
 ---
@@ -86,7 +86,7 @@ cp .env.example .env
 
 ```env
 # Domain & URLs
-ROOT_URL=https://listmonk.sandbox.ellak.gr
+ROOT_URL=https://listmonk.sandbox.iosifidis.gr
 
 # PostgreSQL Credentials
 LISTMONK_DB_USER=listmonk
@@ -159,25 +159,25 @@ networks:
 
 ### 4. Ρύθμιση Caddyfile
 
-#### Εκδοχή Α: Subdomain (`listmonk.sandbox.ellak.gr`) — Προτεινόμενη
+#### Εκδοχή Α: Subdomain (`listmonk.sandbox.iosifidis.gr`) — Προτεινόμενη
 
 Περιλαμβάνεται έτοιμη στο [Caddyfile](./Caddyfile):
 
 ```caddyfile
-listmonk.sandbox.ellak.gr {
+listmonk.sandbox.iosifidis.gr {
     encode zstd gzip
 
     reverse_proxy listmonk-app:9000
 }
 ```
 
-#### Εκδοχή Β: Subpath / Subfolder (`sandbox.ellak.gr/listmonk`)
+#### Εκδοχή Β: Subpath / Subfolder (`sandbox.iosifidis.gr/listmonk`)
 
-* **Απαραίτητη αλλαγή στο `.env`:** Πρέπει να ορίσετε το `ROOT_URL=https://sandbox.ellak.gr/listmonk`, ώστε τα links επιβεβαίωσης, εγγραφής και τα static assets να σερβίρονται με το σωστό πρόθεμα.
+* **Απαραίτητη αλλαγή στο `.env`:** Πρέπει να ορίσετε το `ROOT_URL=https://sandbox.iosifidis.gr/listmonk`, ώστε τα links επιβεβαίωσης, εγγραφής και τα static assets να σερβίρονται με το σωστό πρόθεμα.
 * **Ιδιαιτερότητα Caddy:** Το Listmonk χειρίζεται εσωτερικά το base path του root URL. Συνεπώς, χρησιμοποιούμε απλό matcher `handle /listmonk*` **χωρίς** `handle_path` (ώστε να μην αφαιρεθεί το πρόθεμα `/listmonk` από το URI που λαμβάνει το container):
 
 ```caddyfile
-sandbox.ellak.gr {
+sandbox.iosifidis.gr {
     encode zstd gzip
 
     handle /listmonk* {
@@ -200,7 +200,7 @@ docker compose up -d
 docker compose logs -f listmonk-app
 ```
 
-Μόλις δείτε το μήνυμα εκκίνησης του HTTP server στο port `9000`, επαληθεύστε την πρόσβαση στο domain σας (π.χ. `https://listmonk.sandbox.ellak.gr`) και συνδεθείτε με τα στοιχεία του Super Admin από το αρχείο `.env`.
+Μόλις δείτε το μήνυμα εκκίνησης του HTTP server στο port `9000`, επαληθεύστε την πρόσβαση στο domain σας (π.χ. `https://listmonk.sandbox.iosifidis.gr`) και συνδεθείτε με τα στοιχεία του Super Admin από το αρχείο `.env`.
 
 ---
 
