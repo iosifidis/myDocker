@@ -43,7 +43,7 @@
 ## 📁 Δομή Αρχείων
 
 ```bash
-/Pretix
+/pretix
 ├── Caddyfile              # Ρυθμίσεις Caddy Reverse Proxy
 ├── Configuration.md       # Οδηγός ρύθμισης διοργανωτών, ομάδων, δικαιωμάτων & pretixSCAN
 ├── docker-compose.yml     # Υπηρεσίες pretix-web, pretix-worker, PostgreSQL & Redis

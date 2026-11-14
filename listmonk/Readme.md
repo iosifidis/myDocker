@@ -42,7 +42,7 @@
 ## 📁 Δομή Αρχείων
 
 ```bash
-/Listmonk
+/listmonk
 ├── Caddyfile              # Ρυθμίσεις Caddy Reverse Proxy
 ├── Configuration.md       # Αναλυτικός οδηγός ρύθμισης Postfix SMTP & Deliverability
 ├── docker-compose.yml     # Υπηρεσίες listmonk-app & listmonk-db (PostgreSQL)
