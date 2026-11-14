@@ -1,0 +1,19 @@
+services:
+  semaphore:
+    image: semaphoreui/semaphore:latest
+    container_name: semaphore
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      TZ: Europe/Athens
+    volumes:
+      - ./config:/etc/semaphore
+      - ./data:/var/lib/semaphore
+      - ./tmp:/tmp/semaphore
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

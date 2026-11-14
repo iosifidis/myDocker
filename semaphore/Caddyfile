@@ -1,0 +1,10 @@
+infra.iosifidis.gr {
+    reverse_proxy semaphore:3000
+
+    encode zstd gzip
+
+    log {
+        output file /var/log/caddy/infra.iosifidis.gr.log
+        format json
+    }
+}

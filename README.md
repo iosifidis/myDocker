@@ -38,6 +38,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**Office Suites (ONLYOFFICE & Collabora)**](./office_suites/) – Combined deployment of ONLYOFFICE Docs and Collabora Online (CODE) on a single VM behind Caddy reverse proxy with anti-php2shell hardening.
 - [**Collabora Online (CODE)**](./collabora/) – Standalone Collabora Online Development Edition container for Nextcloud Office (WOPI) behind Caddy reverse proxy with anti-php2shell hardening.
 - [**ONLYOFFICE Docs**](./onlyoffice/) – Standalone ONLYOFFICE Document Server with PostgreSQL, RabbitMQ, and JWT authentication behind Caddy reverse proxy.
+- [**Semaphore UI**](./semaphore/) – A modern web UI for Ansible automation using SQLite backend, behind Caddy reverse proxy with Ferm firewall compatibility notes.
 
 ### 📈 Monitoring
 
