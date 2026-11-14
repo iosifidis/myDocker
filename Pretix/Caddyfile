@@ -1,0 +1,15 @@
+ticket.iosifidis.gr {
+    encode zstd gzip
+
+    # Upload size limit (e.g. 16MB)
+    request_body {
+        max_size 16MB
+    }
+
+    reverse_proxy pretix-web:80 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto https
+    }
+}

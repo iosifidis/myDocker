@@ -1,0 +1,56 @@
+services:
+  pretix-db:
+    image: postgres:16-alpine
+    container_name: pretix-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  pretix-redis:
+    image: redis:7-alpine
+    container_name: pretix-redis
+    restart: unless-stopped
+    volumes:
+      - ./redis:/data
+    networks:
+      - internal
+
+  pretix-web:
+    image: pretix/standalone:stable
+    container_name: pretix-web
+    restart: unless-stopped
+    depends_on:
+      - pretix-db
+      - pretix-redis
+    volumes:
+      - ./data:/data
+      - ./etc:/etc/pretix
+    networks:
+      - internal
+      - web
+
+  pretix-worker:
+    image: pretix/standalone:stable
+    container_name: pretix-worker
+    restart: unless-stopped
+    command: taskworker
+    depends_on:
+      - pretix-db
+      - pretix-redis
+    volumes:
+      - ./data:/data
+      - ./etc:/etc/pretix
+    networks:
+      - internal
+
+networks:
+  web:
+    external: true
+  internal:
+    driver: bridge

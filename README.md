@@ -34,6 +34,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**VoucherVault**](./vouchervault/) – An open-source voucher, gift card, and coupon management application with automated expiry notifications via Apprise.
 - [**WordPress (PHP-FPM)**](./wordpress/) – High-performance WordPress deployment using PHP-FPM and MariaDB behind Caddy reverse proxy for static asset offloading and automatic HTTPS.
 - [**Listmonk**](./Listmonk/) – A high-performance, self-hosted newsletter and mailing list manager with a PostgreSQL backend, behind Caddy reverse proxy.
+- [**Pretix**](./Pretix/) – A self-hosted open-source ticketing and event registration platform powered by PostgreSQL, Redis, and Caddy reverse proxy.
 
 ### 📈 Monitoring
 
