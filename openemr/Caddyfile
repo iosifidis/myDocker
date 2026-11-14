@@ -1,0 +1,23 @@
+emr.iosifidis.gr {
+    # Block sensitive installation/upgrade scripts
+    @blocked_scripts {
+        path /setup.php /sql_upgrade.php /acl_upgrade.php /ippf_upgrade.php /gacl/setup.php
+    }
+    respond @blocked_scripts 403
+
+    # Prevent PHP/script execution in data/uploads directories (anti-php2shell)
+    @blocked_uploads_php {
+        path_regexp ^/sites/.*\.(php|php[3-8]|phtml|phar|sh|cgi|pl|py)$
+    }
+    respond @blocked_uploads_php 403
+
+    # Security Headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    reverse_proxy openemr_app:80
+}
