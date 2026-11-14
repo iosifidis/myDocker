@@ -1,0 +1,5 @@
+listmonk.sandbox.ellak.gr {
+    encode zstd gzip
+
+    reverse_proxy listmonk-app:9000
+}

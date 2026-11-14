@@ -33,6 +33,7 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**Shiori**](./shiori/) - A simple and efficient bookmark manager. Shiori allows you to save and organize your favorite web links with tags, provides full-text search, and even lets you archive web pages for offline reading. It's a lightweight, self-hosted solution for keeping your digital bookmarks in order.
 - [**VoucherVault**](./vouchervault/) – An open-source voucher, gift card, and coupon management application with automated expiry notifications via Apprise.
 - [**WordPress (PHP-FPM)**](./wordpress/) – High-performance WordPress deployment using PHP-FPM and MariaDB behind Caddy reverse proxy for static asset offloading and automatic HTTPS.
+- [**Listmonk**](./Listmonk/) – A high-performance, self-hosted newsletter and mailing list manager with a PostgreSQL backend, behind Caddy reverse proxy.
 
 ### 📈 Monitoring
 

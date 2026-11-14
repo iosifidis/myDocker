@@ -1,0 +1,52 @@
+services:
+  listmonk-db:
+    image: postgres:16-alpine
+    container_name: listmonk-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${LISTMONK_DB_USER}
+      POSTGRES_PASSWORD: ${LISTMONK_DB_PASSWORD}
+      POSTGRES_DB: ${LISTMONK_DB_NAME}
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${LISTMONK_DB_USER} -d ${LISTMONK_DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  listmonk-app:
+    image: listmonk/listmonk:latest
+    container_name: listmonk-app
+    restart: unless-stopped
+    # On first boot, runs schema install / upgrade and starts the app
+    command: [sh, -c, "yes | ./listmonk --install --idempotent --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    depends_on:
+      listmonk-db:
+        condition: service_healthy
+    environment:
+      - LISTMONK_app__address=0.0.0.0:9000
+      - LISTMONK_app__root_url=${ROOT_URL}
+      - LISTMONK_db__host=listmonk-db
+      - LISTMONK_db__port=5432
+      - LISTMONK_db__user=${LISTMONK_DB_USER}
+      - LISTMONK_db__password=${LISTMONK_DB_PASSWORD}
+      - LISTMONK_db__database=${LISTMONK_DB_NAME}
+      - LISTMONK_db__ssl_mode=disable
+      - LISTMONK_db__max_open=25
+      - LISTMONK_db__max_idle=25
+      - LISTMONK_ADMIN_USER=${LISTMONK_ADMIN_USER}
+      - LISTMONK_ADMIN_PASSWORD=${LISTMONK_ADMIN_PASSWORD}
+    volumes:
+      - ./uploads:/listmonk/uploads
+    networks:
+      - internal
+      - web
+
+networks:
+  internal:
+    internal: true
+  web:
+    external: true
