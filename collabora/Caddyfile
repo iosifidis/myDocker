@@ -1,0 +1,24 @@
+collabora.iosifidis.gr {
+    encode zstd gzip
+
+    # Prevent PHP/script execution probes (anti-php2shell hardening)
+    @blocked_php_scripts {
+        path_regexp \.(php|php[3-8]|phtml|phar|sh|cgi|pl|py)$
+    }
+    respond @blocked_php_scripts 403
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    reverse_proxy collabora:9980 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto https
+    }
+}

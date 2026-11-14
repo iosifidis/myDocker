@@ -1,0 +1,28 @@
+services:
+  collabora:
+    image: collabora/code:latest
+    container_name: collabora
+    restart: unless-stopped
+    environment:
+      # Public FQDN of Collabora (without protocol)
+      - server_name=collabora.iosifidis.gr
+
+      # Multi-instance Nextcloud configuration (Option A: separate aliasgroups)
+      - aliasgroup1=${NEXTCLOUD_DOMAIN_1}
+      - aliasgroup2=${NEXTCLOUD_DOMAIN_2}
+
+      # Option B (Alternative: regex pattern without spaces):
+      # - aliasgroup1=https://nextcloud(1|2)\.iosifidis\.gr:443
+
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=true
+      - DONT_GEN_SSL_CERT=true
+    volumes:
+      - ./collabora:/opt/cool/data
+    networks:
+      - web
+    cap_add:
+      - MKNOD
+
+networks:
+  web:
+    external: true

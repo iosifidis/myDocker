@@ -35,6 +35,9 @@ This repository manages a suite of self-hosted services running on a Raspberry P
 - [**WordPress (PHP-FPM)**](./wordpress/) – High-performance WordPress deployment using PHP-FPM and MariaDB behind Caddy reverse proxy for static asset offloading and automatic HTTPS.
 - [**Listmonk**](./listmonk/) – A high-performance, self-hosted newsletter and mailing list manager with a PostgreSQL backend, behind Caddy reverse proxy.
 - [**Pretix**](./pretix/) – A self-hosted open-source ticketing and event registration platform powered by PostgreSQL, Redis, and Caddy reverse proxy.
+- [**Office Suites (ONLYOFFICE & Collabora)**](./office_suites/) – Combined deployment of ONLYOFFICE Docs and Collabora Online (CODE) on a single VM behind Caddy reverse proxy with anti-php2shell hardening.
+- [**Collabora Online (CODE)**](./collabora/) – Standalone Collabora Online Development Edition container for Nextcloud Office (WOPI) behind Caddy reverse proxy with anti-php2shell hardening.
+- [**ONLYOFFICE Docs**](./onlyoffice/) – Standalone ONLYOFFICE Document Server with PostgreSQL, RabbitMQ, and JWT authentication behind Caddy reverse proxy.
 
 ### 📈 Monitoring
 

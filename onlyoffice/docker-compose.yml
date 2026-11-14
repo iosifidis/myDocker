@@ -1,0 +1,52 @@
+services:
+  onlyoffice-db:
+    image: postgres:15-alpine
+    container_name: onlyoffice-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=onlyoffice
+      - POSTGRES_USER=onlyoffice
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+    volumes:
+      - ./onlyoffice_postgresql:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  onlyoffice-rabbitmq:
+    image: rabbitmq:3-alpine
+    container_name: onlyoffice-rabbitmq
+    restart: unless-stopped
+    networks:
+      - internal
+
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice
+    restart: unless-stopped
+    depends_on:
+      - onlyoffice-db
+      - onlyoffice-rabbitmq
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=onlyoffice-db
+      - DB_PORT=5432
+      - DB_NAME=onlyoffice
+      - DB_USER=onlyoffice
+      - DB_PWD=${POSTGRES_DB_PASSWORD}
+      - AMQP_URI=amqp://guest:guest@onlyoffice-rabbitmq:5672
+      - JWT_ENABLED=true
+      - JWT_SECRET=${ONLYOFFICE_JWT_SECRET}
+      - JWT_HEADER=Authorization
+      - JWT_IN_BODY=true
+    volumes:
+      - ./onlyoffice_data:/var/www/onlyoffice/Data
+      - ./onlyoffice_log:/var/log/onlyoffice
+    networks:
+      - internal
+      - web
+
+networks:
+  internal:
+    internal: true
+  web:
+    external: true
